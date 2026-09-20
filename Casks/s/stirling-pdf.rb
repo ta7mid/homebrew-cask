@@ -1,6 +1,5 @@
 cask "stirling-pdf" do
-  arch intel: "x86_64"
-  os macos: "macos-universal.dmg", linux: "linux-#{arch}.AppImage"
+  os macos: "macos-universal.dmg", linux: "linux-x86_64.AppImage"
 
   version "2.14.3"
   sha256 arm:          "25073f75260c75854af3c81b457958471142b204f3f37c1142b41c75c5704a55",
@@ -22,7 +21,9 @@ cask "stirling-pdf" do
   on_linux do
     depends_on arch: :x86_64
 
-    app_image "Stirling-PDF-linux-#{arch}.AppImage", target: "Stirling-PDF.AppImage"
+    app_image "Stirling-PDF-linux-x86_64.AppImage", target: "Stirling-PDF.AppImage"
+
+    zap trash: "~/.config/Stirling-PDF"
   end
 
   url "https://github.com/Stirling-Tools/Stirling-PDF/releases/download/v#{version}/Stirling-PDF-#{os}"
