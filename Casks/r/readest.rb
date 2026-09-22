@@ -1,6 +1,7 @@
 cask "readest" do
-  arch arm: "aarch64", intel: "amd64"
-  os macos: "universal.dmg", linux: "#{arch}.AppImage"
+  arch arm:   on_system_conditional(macos: "universal", linux: "aarch64"),
+       intel: on_system_conditional(macos: "universal", linux: "amd64")
+  url_end = on_system_conditional macos: "dmg", linux: "AppImage"
 
   version "0.12.10"
   sha256 arm:          "456bb4fb1569062c84838d1b4cb3eb0db19823eb039efec1eb9c99488a59b47b",
@@ -27,7 +28,7 @@ cask "readest" do
     app_image "Readest_#{version}_#{arch}.AppImage", target: "Readest.AppImage"
   end
 
-  url "https://github.com/readest/readest/releases/download/v#{version}/Readest_#{version}_#{os}"
+  url "https://github.com/readest/readest/releases/download/v#{version}/Readest_#{version}_#{arch}.#{url_end}"
   name "Readest"
   desc "Ebook reader"
   homepage "https://readest.com/"
